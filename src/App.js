@@ -18,18 +18,18 @@ function App() {
   const [showButton, setshowButton] = useState(false)
   const fechaActual = new Date()
   const currentYear = fechaActual.getFullYear();
-  const years = Array.from({length: currentYear - 999}, (_, index) => index + 1000);
-  const arrayNumeros = Array.from({length: 31}, (_, index) => index + 1);
+  const years = Array.from({ length: currentYear - 999 }, (_, index) => index + 1000);
+  const arrayNumeros = Array.from({ length: 31 }, (_, index) => index + 1);
 
 
   //METODOS
   //Se monta la aplicación
   useEffect(() => {
-     arrayNumeros.map(option => (
+    arrayNumeros.map(option => (
       <option key={option} value={option}>
-       {option}
-     </option>
-   ));
+        {option}
+      </option>
+    ));
   });
 
 
@@ -39,7 +39,7 @@ function App() {
     years.forEach((year) => {
       console.log(year)
     })
-   
+
   }
 
   //Muestra la ultima ventana
@@ -47,16 +47,16 @@ function App() {
     setNexttho(true)
     arrayNumeros.forEach((element) => {
       console.log(element)
-     })
+    })
   }
 
   function showB() {
     setshowButton(true)
   }
 
-  
 
-  
+
+
 
 
   return (
@@ -79,67 +79,122 @@ function App() {
             <div className='division-mes'>
 
               <div className='input-email'>
-              <h4 className='mes-seleccionado '>Selecciona el Mes</h4>
-              <select onChange={ (e) => {
-                setmes(e.target.value)
-                next()
-                
-              }}>
-                
-                {datamonth.map((i) => {
-                  return <option key={i} value={i.nombre} >{i.nombre}</option>
-                })}
-              </select>
+                <h4 className='mes-seleccionado '>Selecciona el Mes</h4>
+                <select onChange={(e) => {
+                  setmes(e.target.value)
+                  next()
+
+                }}>
+
+                  {datamonth.map((i) => {
+                    return <option key={i} value={i.nombre} >{i.nombre}</option>
+                  })}
+                </select>
               </div>
-                {/* Contenido del mes */}
+              {/* Contenido del mes */}
               <div className='contenido-mes'>
-              <h4 className='mes-seleccionado '>{mes}</h4>
+                <h4 className='mes-seleccionado '>{mes}</h4>
 
               </div>
-              
+
             </div>
             {/* Fin division mes  */}
 
 
-                {/* Inicio division año */}
+            {/* Inicio division año */}
             <div className={nextone ? "show division-año" : "dont-show"} >
               <h4>Introduce Año</h4>
               <select onChange={(e) => {
                 setano(e.target.value)
                 nextNext()
               }}>
-                
+
                 {years.map((i) => {
                   return <option key={i} value={i} >{i}</option>
                 })}
               </select>
             </div>
-             {/* Fin division año */}
+            {/* Fin division año */}
             <div className={nexttho ? "show division-dia" : "dont-show"} >
               <h4>Seleccion el día</h4>
-             
+
               <select onChange={(e) => {
                 showB()
                 setdia(e.target.value)
               }}>
                 {arrayNumeros.map((i) => {
                   return <option key={i} value={i} > {i} </option>
-                } )}
+                })}
               </select>
-              
+
             </div>
 
 
-            <button onClick= {(event) => {
+            <button onClick={(event) => {
               event.preventDefault()
               console.log("Calculando")
+              let edad = 0
               let diaEntero = parseInt(dia)
               let añoEntero = parseInt(año)
-              let nuevoResultado = diaEntero + añoEntero
-              setResutado(nuevoResultado)
-              console.log(resultdoPrueba)
+              let monthNumber;
+              switch (mes) {
+                case "Enero":
+                  monthNumber = 1;
+                  break;
+                case "Febrero":
+                  monthNumber = 2;
+                  break;
+                case "Marzo":
+                  monthNumber = 3;
+                  break;
+                case "Abril":
+                  monthNumber = 4;
+                  break;
+                case "Mayo":
+                  monthNumber = 5;
+                  break;
+                case "Junio":
+                  monthNumber = 6;
+                  break;
+                case "Julio":
+                  monthNumber = 7;
+                  break;
+                case "Agosto":
+                  monthNumber = 8;
+                  break;
+                case "Septiembre":
+                  monthNumber = 9;
+                  break;
+                case "Octubre":
+                  monthNumber = 10;
+                  break;
+                case "Noviembre":
+                  monthNumber = 11;
+                  break;
+                case "Diciembre":
+                  monthNumber = 12;
+                  break;
+                default:
+                  monthNumber = "Mes no válido";
+              }
 
-            }}  className={showButton ? "show" : "dont-show"}>Calcular</button>
+              if( fechaActual.getMonth() === monthNumber && diaEntero === fechaActual.getDay()) {
+                console.log("Hoy es tu cumpleaños, Felicidades")
+              }
+                
+              
+                if(fechaActual.getMonth() < monthNumber) {
+                  edad = (fechaActual.getFullYear() - añoEntero) - 1
+                } else {
+                    edad = fechaActual.getFullYear() - añoEntero
+                }
+                console.log(edad)
+                console.log(fechaActual.getFullYear())
+                console.log(fechaActual.getMonth())
+                console.log(fechaActual.getDay())
+              
+
+            }} className={showButton ? "show" : "dont-show"}>Calcular</button>
           </form>
         </div>
 
