@@ -19,6 +19,7 @@ function App() {
   const [showButton, setshowButton] = useState(false)
   const [finCiclo, setFinCiclo] = useState(false)
   const [showResult, setShowResult] = useState(true)
+  const [faltaPorCumplis, setFaltaCumplir] = useState(0)
   const fechaActual = new Date()
   const currentYear = fechaActual.getFullYear();
   const years = Array.from({ length: currentYear - 1949 }, (_, index) => index + 1950);
@@ -64,19 +65,35 @@ function App() {
 
   return (
 
-    <div>
+    <div className='App'>
       <div className={finCiclo ? "result" : "dont-show" }>
-      <h1>Tu edad es {edadFinal} </h1>
-      <button id='reload' onClick={() => {
+
+
+
+        <div className='grid'>
+          <div className='circle'>
+          <button id='reload' onClick={() => {
       setFinCiclo(false)
       window.location.reload(true)
             }} className={showButton ? "show button-clic" : "dont-show"}>Reset</button>
+          </div>
+
+          <div className='rectangle'>
+          <h1>Tu edad es {edadFinal} ✴️  </h1>
+          </div>
+          <div className='rectangle-next'>
+          <h1>  <span className='masGrande'>Faltan </span>  <span className='numero'> {faltaPorCumplis}</span> dias para tu proximo cumpleaños 🎉 </h1>
+          </div>
+
+        </div>
+    
+
       </div>
 
     
      
     
-    <div className={finCiclo ? "dont-show" : "App" }>
+    <div className={finCiclo ? "dont-show" : "" }>
 
       
       <header className='header'>
@@ -209,7 +226,18 @@ function App() {
                 } else {
                     edad = fechaActual.getFullYear() - añoEntero
                 }
+
+                const fechaCumpleanos = new Date(fechaActual.getFullYear(), monthNumber - 1, diaEntero)
                 
+                if(fechaCumpleanos < fechaActual) {
+                  fechaCumpleanos.setFullYear(fechaActual.getFullYear() + 1)
+                }
+
+                const diferenciaEnMilisegundos = fechaCumpleanos.getTime() - fechaActual.getTime();
+                const diasFaltantes = Math.ceil(diferenciaEnMilisegundos / (1000 * 60 * 60 * 24));
+                
+                
+                setFaltaCumplir(diasFaltantes)
                 setEdad(edad)
                 setFinCiclo(true)
                 
