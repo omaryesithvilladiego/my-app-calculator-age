@@ -1,5 +1,5 @@
 .tittle {
-  background-color: rgb(81, 169, 169);
+  background-color: rgb(94, 114, 114);
   height: 2rem;
   margin-top: 0;
   display: flex;
@@ -36,24 +36,58 @@
 }
 
 .App {
-  background-color: blanchedalmond;
-  border: 10px solid white;
-  border-radius: 0.5rem;
  
+  background-color: aliceblue;
+  border-radius: 0.5rem;
+  padding-bottom: 1rem;
+  
+}
+.contenido {
+  background-color: rgb(94, 114, 114);
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
 
 }
 
 
 
+h2 {
+  margin: 0;
+}
 
-
-
-
-
-
+.botones {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem
+  
+}
+.tittle {
+  border: none;
+  border-radius: 0.5rem 0.5rem 0rem 0rem;
+}
 .form {
   display: flex;
   flex-direction: column;
+}
+.button-clic {
+  background-color: rgb(193, 193, 224);
+ width: 5rem;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ margin-top: 1rem;
+ padding: 1rem;
+ border: none;
+ border-radius: 10px;
+
+}
+
+.button-clic:hover {
+  background-color: rgb(71, 71, 90);
+  color: azure;
+  cursor: pointer;
 }
 
 body {
@@ -63,19 +97,53 @@ body {
 
 .division-mes {
   padding: 1rem;
-  background-color: red;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+ 
+  background-color: rgb(94, 114, 114);
+  display: flex;
+
+}
+
+.selected-mes {
+  padding: 0.5rem;
+  overflow: hidden;
+  border: none;
+  border-radius: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.selected-mes:focus {
+  border-color: #aaa;
+  box-shadow: 0 0 1px 3px rgba(59, 153, 252, .7);
+  box-shadow: 0 0 0 3px -moz-mac-focusring;
+  color: #222; 
+  outline: none;
+ }
+
+ h4 {
+  color: white;
+  font-size: 1.5rem;
+  margin: 0;
+ }
+
+ h2 {
+  color: white;
+ }
+.option-name {
+ 
+}
+
+.selected-mes:hover {
+  
 }
 
 .division-año {
   padding: 1rem;
-  background-color: aquamarine;
+  background-color: rgb(94, 114, 114);
 }
 
 .division-dia {
   padding: 1rem;
-  background-color: azure;
+  background-color: rgb(94, 114, 114);
 }
 
 .dont-show {

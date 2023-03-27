@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import './App.css';
 import datamonth from "./meses.json"
+import styled from 'styled-components';
 
 
 
@@ -18,7 +19,7 @@ function App() {
   const [showButton, setshowButton] = useState(false)
   const fechaActual = new Date()
   const currentYear = fechaActual.getFullYear();
-  const years = Array.from({ length: currentYear - 999 }, (_, index) => index + 1000);
+  const years = Array.from({ length: currentYear - 1949 }, (_, index) => index + 1950);
   const arrayNumeros = Array.from({ length: 31 }, (_, index) => index + 1);
 
 
@@ -74,20 +75,21 @@ function App() {
         <div className='formulario'>
 
           {/* Inicio de formulario */}
+          <Divisor />
           <form className='form'>
             {/* Input para seleccionar el mes */}
             <div className='division-mes'>
 
               <div className='input-email'>
-                <h4 className='mes-seleccionado '>Selecciona el Mes</h4>
-                <select onChange={(e) => {
+                <h4 className=''>Selecciona el Mes</h4>
+                <select className='selected-mes' onChange={(e) => {
                   setmes(e.target.value)
                   next()
 
                 }}>
 
                   {datamonth.map((i) => {
-                    return <option key={i} value={i.nombre} >{i.nombre}</option>
+                    return <option className='option-name' key={i} value={i.nombre} >{i.nombre}</option>
                   })}
                 </select>
               </div>
@@ -99,12 +101,12 @@ function App() {
 
             </div>
             {/* Fin division mes  */}
-
+                  <Divisor />
 
             {/* Inicio division año */}
             <div className={nextone ? "show division-año" : "dont-show"} >
-              <h4>Introduce Año</h4>
-              <select onChange={(e) => {
+              <h4>Selecciona el Año</h4>
+              <select className='selected-mes' onChange={(e) => {
                 setano(e.target.value)
                 nextNext()
               }}>
@@ -115,10 +117,11 @@ function App() {
               </select>
             </div>
             {/* Fin division año */}
+            <Divisor />
             <div className={nexttho ? "show division-dia" : "dont-show"} >
               <h4>Seleccion el día</h4>
 
-              <select onChange={(e) => {
+              <select className='selected-mes' onChange={(e) => {
                 showB()
                 setdia(e.target.value)
               }}>
@@ -130,6 +133,7 @@ function App() {
             </div>
 
 
+            <div className='botones'>
             <button onClick={(event) => {
               event.preventDefault()
               console.log("Calculando")
@@ -194,7 +198,15 @@ function App() {
                 console.log(fechaActual.getDay())
               
 
-            }} className={showButton ? "show" : "dont-show"}>Calcular</button>
+            }} className={showButton ? "show button-clic" : "dont-show"}>Calcular</button>
+             <button onClick={(event) => {
+              
+      
+           
+
+            }} className={showButton ? "show button-clic" : "dont-show"}>Reset</button>
+            </div>
+           
           </form>
         </div>
 
@@ -206,3 +218,11 @@ function App() {
 }
 
 export default App;
+
+
+const Divisor = styled.div`
+  height: 1px;
+  width:100%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+
+`
