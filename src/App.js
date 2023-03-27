@@ -13,10 +13,12 @@ function App() {
   const [mes, setmes] = useState("")
   const [año, setano] = useState(0)
   const [dia, setdia] = useState(0)
-  const [resultdoPrueba, setResutado] = useState(0)
+  const [edadFinal, setEdad] = useState(0)
   const [nextone, setNextOne] = useState(false)
   const [nexttho, setNexttho] = useState(false)
   const [showButton, setshowButton] = useState(false)
+  const [finCiclo, setFinCiclo] = useState(false)
+  const [showResult, setShowResult] = useState(true)
   const fechaActual = new Date()
   const currentYear = fechaActual.getFullYear();
   const years = Array.from({ length: currentYear - 1949 }, (_, index) => index + 1950);
@@ -61,11 +63,27 @@ function App() {
 
 
   return (
-    <div className="App">
+
+    <div>
+      <div className={finCiclo ? "result" : "dont-show" }>
+      <h1>Tu edad es {edadFinal} </h1>
+      <button id='reload' onClick={() => {
+      setFinCiclo(false)
+      window.location.reload(true)
+            }} className={showButton ? "show button-clic" : "dont-show"}>Reset</button>
+      </div>
+
+    
+     
+    
+    <div className={finCiclo ? "dont-show" : "App" }>
+
+      
       <header className='header'>
         <div className='tittle'>
           <h1 className='titulo'>Calculadora de Edad</h1>
         </div>
+        </header>
 
         <div className='contenido'>
           <h2>Introduce tu fecha de nacimiento
@@ -136,7 +154,6 @@ function App() {
             <div className='botones'>
             <button onClick={(event) => {
               event.preventDefault()
-              console.log("Calculando")
               let edad = 0
               let diaEntero = parseInt(dia)
               let añoEntero = parseInt(año)
@@ -182,7 +199,7 @@ function App() {
                   monthNumber = "Mes no válido";
               }
 
-              if( fechaActual.getMonth() === monthNumber && diaEntero === fechaActual.getDay()) {
+              if( (fechaActual.getMonth() + 1) === monthNumber && diaEntero === fechaActual.getDate()) {
                 console.log("Hoy es tu cumpleaños, Felicidades")
               }
                 
@@ -192,28 +209,30 @@ function App() {
                 } else {
                     edad = fechaActual.getFullYear() - añoEntero
                 }
-                console.log(edad)
-                console.log(fechaActual.getFullYear())
-                console.log(fechaActual.getMonth())
-                console.log(fechaActual.getDay())
+                
+                setEdad(edad)
+                setFinCiclo(true)
+                
               
 
             }} className={showButton ? "show button-clic" : "dont-show"}>Calcular</button>
-             <button onClick={(event) => {
-              
-      
-           
-
-            }} className={showButton ? "show button-clic" : "dont-show"}>Reset</button>
+            
             </div>
            
           </form>
         </div>
-
-
-      </header>
+        <div>
+      <h1 className='fecha-actual'>
+        fecha Actual: <br></br>
+      {fechaActual.getDate()} / {fechaActual.getMonth() + 1} / {fechaActual.getFullYear()}
+      </h1>
+    </div>
 
     </div>
+   
+    </div>
+    
+    
   );
 }
 
